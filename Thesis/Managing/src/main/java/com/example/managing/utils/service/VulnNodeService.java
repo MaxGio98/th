@@ -133,19 +133,21 @@ public class VulnNodeService {
             }
         } else {
             //new node added after the init
-            network.put(url, new NodeStatus(false, newNodeNeighbors.get(0), false, type));
-            for (String neighbor : newNodeNeighbors.getFirst()) {
-                network.get(neighbor).getNeighbors().add(url);
-            }
-            newNodeNeighbors.removeFirst();
-            JSONObject nodeTable = createNodeTable(url);
-            CompletableFuture<HttpResponse> response = sendAsyncMessagePOST(buildMessage(new NodeMessage("", url, 0, nodeTable)), url);
-            response.thenAccept(res -> {
-                if (res.statusCode() == 200) {
-                    network.get(url).setIsReady(true);
-                    triggerDiscovery(url);
+            if (!newNodeNeighbors.isEmpty()) {
+                network.put(url, new NodeStatus(false, newNodeNeighbors.get(0), false, type));
+                for (String neighbor : newNodeNeighbors.getFirst()) {
+                    network.get(neighbor).getNeighbors().add(url);
                 }
-            });
+                newNodeNeighbors.removeFirst();
+                JSONObject nodeTable = createNodeTable(url);
+                CompletableFuture<HttpResponse> response = sendAsyncMessagePOST(buildMessage(new NodeMessage("", url, 0, nodeTable)), url);
+                response.thenAccept(res -> {
+                    if (res.statusCode() == 200) {
+                        network.get(url).setIsReady(true);
+                        triggerDiscovery(url);
+                    }
+                });
+            }
         }
         return new ResponseEntity<>(type, HttpStatus.OK);
     }
