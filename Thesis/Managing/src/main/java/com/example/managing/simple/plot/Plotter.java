@@ -1,4 +1,4 @@
-package com.example.managing.simple.plot;
+/*package com.example.managing.simple.plot;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -139,5 +139,84 @@ public class Plotter extends ApplicationFrame {
 
 	public static void PlotResults(double[] results) {
 		(new Plotter("Network simulation", "Proportion of healthy nodes")).addDataset(results, 0, results.length);
+	}
+}*/
+
+package com.example.managing.simple.plot;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
+public class Plotter {
+
+	private JFreeChart lineChart;
+	private int intervalDuration = 60;
+
+	public Plotter(String applicationTitle, String chartTitle) {
+		lineChart = ChartFactory.createLineChart(
+				chartTitle,
+				"Time",
+				"Percentage of heal",
+				createDataset(new double[1], 0, 1),
+				PlotOrientation.VERTICAL,
+				true, true, false);
+	}
+
+	public Plotter(String applicationTitle, String chartTitle, int intervalDuration) {
+		this(applicationTitle, chartTitle);
+		this.intervalDuration = intervalDuration;
+	}
+
+	private DefaultCategoryDataset createDataset(double[] proportions, int start, int end) {
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		double average = 0.0;
+		int intervalStart = 0;
+
+		for (int i = start; i < end; i++) {
+			dataset.addValue(proportions[i], "healthy-nodes", Integer.valueOf(i));
+			dataset.addValue(95, "requirement", Integer.valueOf(i));
+			if ((i % intervalDuration) == 0) {
+				average = 0.0;
+				intervalStart = i;
+			}
+
+			if ((i % intervalDuration) >= 10) {
+				average = (average * (i - intervalStart - 10) + proportions[i]) / ((i - intervalStart - 10) + 1.0);
+				dataset.addValue(average, "average", Integer.valueOf(i));
+			}
+		}
+
+		return dataset;
+	}
+
+	public void addDataset(double[] result, int start, int end) {
+		lineChart = ChartFactory.createLineChart(
+				lineChart.getTitle().getText(),
+				"Time",
+				"Percentage of heal",
+				createDataset(result, start, end),
+				PlotOrientation.VERTICAL,
+				true, true, false);
+		lineChart.getCategoryPlot().getRenderer().setSeriesPaint(0, Color.RED);
+		lineChart.getCategoryPlot().getRenderer().setSeriesPaint(1, Color.GREEN);
+		lineChart.getCategoryPlot().getRenderer().setSeriesPaint(2, Color.BLUE);
+		lineChart.getPlot().setBackgroundPaint(Color.WHITE);
+		lineChart.getCategoryPlot().getRenderer().setSeriesStroke(0, new BasicStroke(2.0f));
+		lineChart.getCategoryPlot().getRenderer().setSeriesStroke(1, new BasicStroke(2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 1.0f, new float[]{10.0f, 6.0f}, 0.0f));
+		lineChart.getCategoryPlot().getRenderer().setSeriesStroke(2, new BasicStroke(2.0f));
+	}
+
+	public BufferedImage getBufferedImage() {
+		BufferedImage img = new BufferedImage(1366, 768, BufferedImage.TYPE_INT_RGB);
+		Graphics2D g2 = img.createGraphics();
+		lineChart.draw(g2, new java.awt.geom.Rectangle2D.Double(0, 0, 1366, 768));
+		g2.dispose();
+		return img;
 	}
 }

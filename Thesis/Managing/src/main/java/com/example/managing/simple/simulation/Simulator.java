@@ -26,7 +26,7 @@ public class Simulator {
 		for (int t = 0; t < timeSteps; t++) {
 			result[t] = simulateStep(system);
 			if (plotting) {
-				plot.addValueToDataset(result, 0, t);
+				//plot.addValueToDataset(result, 0, t);
 //				try {
 //					Thread.sleep(50);
 //				} catch (InterruptedException e) {
@@ -76,7 +76,7 @@ public class Simulator {
 	}
 
 	public void saveFile(String name) throws IOException {
-		plot.save(name);
+		//plot.save(name);
 
 	}
 

@@ -43,6 +43,8 @@ public class ManagingApplication {
         healthyResults = new ArrayList<>();
         newNodeNeighbors = new ArrayList<>();
         //SpringApplication.run(ManagingApplication.class, args);
+        System.setProperty("java.awt.headless", "true");
+
         SpringApplicationBuilder builder = new SpringApplicationBuilder(ManagingApplication.class);
         builder.headless(false);
         ConfigurableApplicationContext context = builder.run(args);
