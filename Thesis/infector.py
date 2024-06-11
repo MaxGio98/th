@@ -73,13 +73,17 @@ if response.status_code == 200:
         while True:
             try:
                 user_input = input("Insert no. type and probability (example: '1 0.5'): ")
-                tipo, new_probability = user_input.split()
-                tipo = int(tipo)
+                type, new_probability = user_input.split()
+                type = int(type)
                 new_probability = float(new_probability)
                 if(new_probability < 0 or new_probability > 1):
                     print("The probability must be between 0 and 1.")
                 else:
-                    update_probability(tipo, new_probability)
+                    if type == -1:
+                        for type in probabilities.keys():
+                            update_probability(type, new_probability)
+                    else:
+                        update_probability(type, new_probability)
             except ValueError:
                 print("Input not valid. Please insert a no. type and a probability separated by a space.")
     # Esegui il ciclo in un thread separato
