@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="node" target="21" />
+      <module name="node.main" target="21" />
+      <module name="node.test" target="21" />
+      <module name="Thesis.Thesis" target="21" />
+      <module name="Thesis.Thesis.main" target="21" />
+      <module name="Thesis.Thesis.main~1" target="21" />
+      <module name="Thesis.Thesis.test" target="21" />
+      <module name="Thesis.Thesis.test~1" target="21" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
