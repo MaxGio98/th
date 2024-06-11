@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.vulnerablenode.VulnerableNodeApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-06-11T14:02:37" hostname="max" time="0.669">
+  <properties/>
+  <testcase name="contextLoads()" classname="com.example.vulnerablenode.VulnerableNodeApplicationTests" time="0.669"/>
+  <system-out><![CDATA[16:02:36.204 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.vulnerablenode.VulnerableNodeApplicationTests]: VulnerableNodeApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+16:02:36.283 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.vulnerablenode.VulnerableNodeApplication for test class com.example.vulnerablenode.VulnerableNodeApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.4)
+
+2024-06-11T16:02:36.561+02:00  WARN 18008 --- [VulnerableNode] [    Test worker] ory$DuplicateJsonObjectContextCustomizer : 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/root/.gradle/caches/modules-2/files-2.1/org.json/json/20231013/e22e0c040fe16f04ffdb85d851d77b07fc05ea52/json-20231013.jar!/org/json/JSONObject.class
+	jar:file:/root/.gradle/caches/modules-2/files-2.1/com.vaadin.external.google/android-json/0.0.20131108.vaadin1/fa26d351fe62a6a17f5cda1287c1c6110dec413f/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+
+2024-06-11T16:02:36.572+02:00  INFO 18008 --- [VulnerableNode] [    Test worker] c.e.v.VulnerableNodeApplicationTests     : Starting VulnerableNodeApplicationTests using Java 21.0.3 with PID 18008 (started by root in /home/max/Scrivania/Thesis/VulnerableNode)
+2024-06-11T16:02:36.573+02:00  INFO 18008 --- [VulnerableNode] [    Test worker] c.e.v.VulnerableNodeApplicationTests     : No active profile set, falling back to 1 default profile: "default"
+2024-06-11T16:02:37.481+02:00  INFO 18008 --- [VulnerableNode] [    Test worker] c.e.v.VulnerableNodeApplicationTests     : Started VulnerableNodeApplicationTests in 1.093 seconds (process running for 1.972)
+127.0.1.1
+]]></system-out>
+  <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (/root/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.14.12/be4984cb6fd1ef1d11f218a648889dfda44b8a15/byte-buddy-agent-1.14.12.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+</testsuite>
